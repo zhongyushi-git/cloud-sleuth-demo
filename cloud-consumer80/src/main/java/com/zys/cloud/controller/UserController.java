@@ -1,23 +1,22 @@
 package com.zys.cloud.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import com.zys.cloud.client.UserClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/consumer")
 public class UserController {
-    private final  String BASE_URL="http://cloud-provider";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Resource
+    private UserClient userClient;
 
     @GetMapping("/get")
     public String get(){
-        return restTemplate.getForObject(BASE_URL+"/user/get",String.class);
+        return userClient.get();
     }
-
 
 }
